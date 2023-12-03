@@ -163,3 +163,4 @@ cython_debug/
 *.bin
 *.pdf
 *.csv
+*.gguf
