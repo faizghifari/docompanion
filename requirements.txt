@@ -6,3 +6,10 @@ ipykernel
 chromadb
 streamlit
 pypdf
+doc2txt
+EbookLib
+html2text
+olefile
+nbconvert
+python-pptx 
+Pillow
