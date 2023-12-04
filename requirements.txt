@@ -6,7 +6,7 @@ ipykernel
 chromadb
 streamlit
 pypdf
-doc2txt
+doc2text
 EbookLib
 html2text
 olefile
