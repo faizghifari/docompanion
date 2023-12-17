@@ -5,6 +5,7 @@ ipython
 ipykernel
 chromadb
 streamlit
+streamlit-extras
 pypdf
 doc2text
 EbookLib
