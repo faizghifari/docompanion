@@ -1,6 +1,8 @@
 import chromadb
 import streamlit as st
 
+from streamlit_extras.switch_page_button import switch_page
+
 from setup_llm import setup_llm_display
 from setup_docs import setup_docs_display
 
@@ -8,10 +10,6 @@ st.set_page_config(page_title="Home - Docompanion", page_icon=":blue_book:")
 
 
 def main():
-    st.columns((2.25, 3, 2.25))[1].header(
-        "Docompanion :blue_book:", anchor="home", divider="rainbow"
-    )
-
     if "db" not in st.session_state:
         st.session_state.db = chromadb.PersistentClient(path="./db")
     if "service_context" not in st.session_state:
@@ -24,6 +22,10 @@ def main():
         st.session_state.subq_qe_engine = None
     if "file_paths" not in st.session_state:
         st.session_state.file_paths = []
+
+    st.columns((2.25, 3, 2.25))[1].header(
+        "Docompanion :blue_book:", anchor="home", divider="rainbow"
+    )
 
     st.subheader("Setup Your LLM Companion", anchor="llm")
 
@@ -40,7 +42,7 @@ def main():
     if st.session_state.subq_qe_engine and st.session_state.service_context:
         st.write("")
         if st.columns((1, 1, 1))[1].button("Start Your Companion", type="primary"):
-            st.experimental_set_query_params(page="new_page")
+            switch_page("chat companion")
 
 
 if __name__ == "__main__":
