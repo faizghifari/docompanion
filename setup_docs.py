@@ -7,6 +7,7 @@ import streamlit as st
 from llama_index import SimpleDirectoryReader, VectorStoreIndex
 from llama_index.storage.storage_context import StorageContext
 from llama_index.tools import QueryEngineTool, ToolMetadata
+from llama_index.query_engine import SubQuestionQueryEngine
 from llama_index.vector_stores import ChromaVectorStore
 
 import utils
@@ -85,9 +86,16 @@ def setup_docs_display():
             if len(st.session_state.file_paths) > 0:
                 if st.columns((1, 1, 1))[1].button("Build Document Index"):
                     with st.spinner("Indexing..."):
-                        st.session_state.subq_qe_engine = build_index_and_query_engine(
+                        qe_tools = build_index_and_query_engine(
                             st.session_state.file_paths,
                             st.session_state.service_context,
+                        )
+                        st.session_state.subq_qe_engine = (
+                            SubQuestionQueryEngine.from_defaults(
+                                query_engine_tools=qe_tools,
+                                service_context=st.session_state.service_context,
+                                use_async=True,
+                            )
                         )
 
     if st.session_state.subq_qe_engine:
