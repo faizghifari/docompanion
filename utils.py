@@ -124,3 +124,10 @@ def download(url, dest_folder):
         raise ConnectionError(
             "Download failed: status code {}\n{}".format(r.status_code, r.text)
         )
+
+def read_mdfile(filename):
+    content = ""
+    with open(filename, 'r') as cl_file:
+        content = cl_file.read()
+    content = re.sub(r'<!--((.|\n)*?)-->', "", content) # remove comment in markdown
+    return content
